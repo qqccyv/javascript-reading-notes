@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let str = '你好啊'
+    console.log(str.length);
+    let b = undefined;
+    console.log(`${b} hh`);
+
+    let c = {
+      toString: () => {
+        return 'hh'
+      }
+    }
+    // console.log(null.toString());
+    // console.log(undefined.toString());
+    console.log(`${c}`);
+    // 模板字面量标签函数
+    function simpleTag(strings, ...expressions) {
+      return strings[0] + expressions.map((item, index) => {
+        return `${item}${strings[index + 1]}`
+      }).join('')
+    }
+
+    let str2 = `${str} + ${b} = ${c}`
+
+    console.log(simpleTag`${str} + ${b} = ${c}`);
+
+
+  </script>
+</body>
+
+</html>
