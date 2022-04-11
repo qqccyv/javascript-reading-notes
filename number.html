@@ -16,6 +16,19 @@
     console.log(Number.MAX_SAFE_INTEGER);
     // 科学计数法表示的浏览器能表示的最大值
     console.log(Number.MAX_VALUE);
+    // 0 -0 +0 相除 都会得到NaN ,表示本来要返回数值的操作失败了（而不是抛出错误）
+    console.log(0 / -0);
+    console.log(500 / -0);
+    console.log(isNaN(undefined)); // 
+    console.log(isNaN(null));
+    console.log(Number(null));
+    console.log(NaN === undefined);// NaN 不等于包括NaN在内的任何值
+    console.log(Number('asf123'));
+    let a = {
+      b: 123
+    }
+    console.log(a.valueOf());
+    console.log(Number(a));
   </script>
 </body>
 
