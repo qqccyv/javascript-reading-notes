@@ -34,7 +34,14 @@
 
     console.log(simpleTag`${str} + ${b} = ${c}`);
 
-
+    // 原始字符串
+    console.log('\u00A9');
+    console.log(String.raw`\u00A9`);
+    const printRaw = (strings) => {
+      console.log(strings.raw);
+      console.log(strings);
+    }
+    printRaw`\u00A9${'and'}\nh${'and'}hh`
   </script>
 </body>
 
