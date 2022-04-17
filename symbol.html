@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let myBoolean = new Boolean();
+    console.log(myBoolean);
+    console.log(typeof myBoolean);
+    let genericSymbol = Symbol(123);
+    let otherGenericSymbol = Symbol(456);
+    // let c = new Symbol()
+    console.log(genericSymbol);
+    console.log(otherGenericSymbol);
+
+
+    // 使用全局符号注册表
+    const mySymbol = Symbol.for('123')
+
+    const obj = {
+      [mySymbol]: 456
+    }
+    console.log(obj[mySymbol]);
+    console.log(Symbol.keyFor(mySymbol));
+
+
+    // 使用符号作为属性
+    const s1 = Symbol('123')
+    const s2 = Symbol('456')
+    const fooObj = {
+      a: '123',
+      b: '456',
+      [s1]: 123,
+      [s2]: 456
+    }
+    console.log(Object.getPrototypeOf(fooObj));
+    console.log(Object.getOwnPropertyDescriptors(fooObj));
+    console.log(Object.getOwnPropertyNames(fooObj));
+    console.log(Object.keys(fooObj));
+
+    const barObj = {
+      [Symbol(123)]: 123
+    }
+    const result = Object.getOwnPropertySymbols(barObj).find(symbol => {
+      return symbol.toString().indexOf('123')
+    })
+    console.log(barObj[result]);
+
+    // symbol 常用内置符号
+    const arr = [1, 2, 3, 4, 5];
+    // 简略实现符合迭代器规范的interator方法
+    arr[Symbol.iterator] = function () {
+      let index = 0;
+      let self = this;
+      return {
+        next() {
+          if (index >= self.length) {
+            return {
+              done: true,
+              value: undefined
+            }
+          }
+          return {
+            done: false,
+            value: self[index++] * 2
+          }
+        }
+      }
+    }
+    for (const item of arr) {
+      console.log(item);
+    }
+  </script>
+</body>
+
+</html>
