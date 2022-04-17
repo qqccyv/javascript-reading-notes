@@ -40,9 +40,12 @@
       [s2]: 456
     }
     console.log(Object.getPrototypeOf(fooObj));
-    console.log(Object.getOwnPropertyDescriptors(fooObj));
     console.log(Object.getOwnPropertyNames(fooObj));
     console.log(Object.keys(fooObj));
+    console.log(Object.getOwnPropertySymbols(fooObj));
+    // 下面两个都能拿到对象里面的symbol和普通属性，区别就是一个返回包含两种类型的对象，一个包含类型的键的数组
+    console.log(Object.getOwnPropertyDescriptors(fooObj));
+    console.log(Reflect.ownKeys(fooObj));
 
     const barObj = {
       [Symbol(123)]: 123
@@ -74,6 +77,31 @@
       }
     }
     for (const item of arr) {
+      console.log(item);
+    }
+
+
+    // 在对象的原型上面添加 Symbol.iterator 方法，避免在循环的时候将我们添加的方法循环出来
+    Object.prototype[Symbol.iterator] = function () {
+      const self = this;
+      const keys = Reflect.ownKeys(self);
+      let index = 0;
+      return {
+        next() {
+          if (index >= keys.length) {
+            return {
+              done: true,
+              value: undefined
+            }
+          }
+          return {
+            done: false,
+            value: self[keys[index++]]
+          }
+        }
+      }
+    }
+    for (const item of fooObj) {
       console.log(item);
     }
   </script>
