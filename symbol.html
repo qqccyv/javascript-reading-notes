@@ -141,6 +141,23 @@
         console.log(item);
       }
     })()
+
+
+
+    class Fn {
+      constructor() {
+        this.x = Symbol.for('x');
+      }
+      static [Symbol.hasInstance](obj) {
+        return obj.x && obj.x == Symbol.for('x')
+      }
+    }
+    let intanceArr = [1, 3, 4];
+    let instanceFn = new Fn()
+    Object.setPrototypeOf(intanceArr, Fn.prototype);
+    // console.dir(intanceArr)
+    // console.dir(instanceFn)
+    console.log(intanceArr instanceof Fn);
   </script>
 </body>
 
